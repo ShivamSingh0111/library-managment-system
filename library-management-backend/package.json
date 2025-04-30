@@ -2,6 +2,9 @@
   "name": "library-management-backend",
   "version": "1.0.0",
   "main": "server.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"
@@ -11,7 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^8.14.1",
+    "mongoose": "^7.6.3",
     "nodemon": "^3.1.10"
   },
   "description": "",
