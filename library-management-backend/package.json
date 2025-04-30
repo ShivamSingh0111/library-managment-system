@@ -2,6 +2,7 @@
   "name": "library-management-backend",
   "version": "1.0.0",
   "main": "server.js",
+  "types": "commonjs",
   "engines": {
     "node": "18.x"
   },
