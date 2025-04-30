@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Book = require('../models/Book');
+const bcrypt = require('bcrypt');
 
 exports.getAllUsers = async (req, res, next) => {
   try {
@@ -21,10 +22,13 @@ exports.createUser = async (req, res, next) => {
     }
 
     // Create new user
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     const user = new User({
       name,
       email,
-      password, // In a real app, you should hash the password
+      password: hashedPassword,
       role: isAdmin ? 'admin' : 'user',
       isAdmin: isAdmin || false
     });
@@ -52,7 +56,8 @@ exports.login = async (req, res, next) => {
     }
 
     // In a real app, you should verify the password hash
-    if (user.password !== password) {
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
